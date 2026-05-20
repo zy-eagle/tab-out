@@ -9,3 +9,6 @@ extension/config.local.js
 
 # Editor workspace config
 .vscode/
+
+# Build output
+dist/
