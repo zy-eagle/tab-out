@@ -60,6 +60,13 @@ async function updateBadge() {
   }
 }
 
+// ─── Open dashboard on toolbar icon click ────────────────────────────────────
+
+chrome.action.onClicked.addListener(() => {
+  const dashboardUrl = chrome.runtime.getURL('index.html');
+  chrome.tabs.create({ url: dashboardUrl });
+});
+
 // ─── Event listeners ──────────────────────────────────────────────────────────
 
 // Update badge when the extension is first installed

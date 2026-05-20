@@ -1445,6 +1445,54 @@ document.addEventListener('click', (e) => {
   }
 });
 
+// ---- Tab search — filter domain cards as user types ----
+document.addEventListener('input', (e) => {
+  if (e.target.id !== 'tabSearch') return;
+
+  const q = e.target.value.trim().toLowerCase();
+  const cards = document.querySelectorAll('#openTabsMissions .mission-card');
+  const shortcutEl = document.getElementById('searchShortcut');
+  if (shortcutEl) shortcutEl.style.display = q ? 'none' : '';
+
+  let visibleCount = 0;
+  cards.forEach(card => {
+    if (!q) {
+      card.style.display = '';
+      visibleCount++;
+      return;
+    }
+    const name = (card.querySelector('.mission-name')?.textContent || '').toLowerCase();
+    const chips = card.querySelectorAll('.chip-text');
+    let chipMatch = false;
+    chips.forEach(chip => {
+      if (chip.textContent.toLowerCase().includes(q)) chipMatch = true;
+    });
+    const match = name.includes(q) || chipMatch;
+    card.style.display = match ? '' : 'none';
+    if (match) visibleCount++;
+  });
+
+  const countEl = document.getElementById('openTabsSectionCount');
+  if (countEl && q) {
+    countEl.innerHTML = `${visibleCount} result${visibleCount !== 1 ? 's' : ''}`;
+  }
+});
+
+// ---- Keyboard shortcut: "/" to focus search ----
+document.addEventListener('keydown', (e) => {
+  const searchInput = document.getElementById('tabSearch');
+  if (!searchInput) return;
+  if (e.key === '/' && document.activeElement !== searchInput && !e.ctrlKey && !e.metaKey) {
+    e.preventDefault();
+    searchInput.focus();
+  }
+  if (e.key === 'Escape' && document.activeElement === searchInput) {
+    searchInput.value = '';
+    searchInput.dispatchEvent(new Event('input'));
+    searchInput.blur();
+  }
+});
+
 // ---- Archive search — filter archived items as user types ----
 document.addEventListener('input', async (e) => {
   if (e.target.id !== 'archiveSearch') return;

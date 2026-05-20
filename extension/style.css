@@ -58,7 +58,7 @@ body::before {
 header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   margin-bottom: 48px;
   padding-bottom: 24px;
   border-bottom: 1px solid var(--warm-gray);
@@ -79,6 +79,58 @@ header {
   font-weight: 400;
   letter-spacing: 0.5px;
   text-transform: uppercase;
+}
+
+/* ---- Search box ---- */
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  width: 16px;
+  height: 16px;
+  color: var(--muted);
+  pointer-events: none;
+}
+
+#tabSearch {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  padding: 8px 36px 8px 36px;
+  width: 240px;
+  border: 1px solid var(--warm-gray);
+  border-radius: 8px;
+  background: var(--card-bg);
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, width 0.25s;
+}
+
+#tabSearch:focus {
+  border-color: var(--accent-sage);
+  box-shadow: 0 0 0 3px rgba(90, 122, 98, 0.1);
+  width: 300px;
+}
+
+#tabSearch::placeholder {
+  color: var(--muted);
+}
+
+.search-shortcut {
+  position: absolute;
+  right: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  padding: 2px 6px;
+  border: 1px solid var(--warm-gray);
+  border-radius: 4px;
+  background: var(--paper);
+  color: var(--muted);
+  pointer-events: none;
 }
 
 /* ---- Tab cleanup banner ---- */
